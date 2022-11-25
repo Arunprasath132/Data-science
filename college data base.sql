@@ -1,0 +1,1 @@
+CREATE TABLE StudDetails(slno int,Name varchar(20),Type varchar(10),Dte date);

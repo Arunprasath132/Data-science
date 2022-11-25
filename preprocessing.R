@@ -1,0 +1,21 @@
+library(rvest)
+library(dplyr)
+imdb.ratings<-read.csv("C:\\Users\\Arun\\Documents\\data science\\001 My_movie data For Data Preprocesing.csv")
+View(imdb.ratings)
+imdb.ratingswatch_list=factor(imdb.ratings$watch_list,
+                             levels =c('true','false'),
+                             labels=c(1,0))
+View(imdb.ratings)
+library(caTools)
+split=sample.split(imdb.ratings$rating,SplitRatio=0.6)
+training_set=subset(imdb.ratings,split==TRUE)
+testing_set=subset(imdb.ratings,split==FALSE)
+View(testing_set)
+install.packages("outliers")
+library(outliers)
+test<-grubbs.test(imdb.ratings$rating)
+test
+training_set$scaled_gross=scale(training_set[,4])
+View(training_set)
+testing_set$scaled_gross=scale(testing_set[,4])
+View(testing_set)

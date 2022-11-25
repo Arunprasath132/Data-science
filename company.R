@@ -1,0 +1,13 @@
+library(rvest)
+library(dplyr)
+link='https://www.moneyworks4me.com/best-index/nse-stocks/top-nifty50-companies-list/'
+web=read_html(link)
+companyname=web%>%html_nodes('.company-ellipses a')%>%html_text()
+View(companyname)
+companylevel=web%>%html_nodes(".stick+ td")%>%html_text()
+View(companylevel)
+pricechange=web%>%html_nodes("#stock-list-table td:nth-child(4)")%>%html_text()
+View(pricechange)
+company=data.frame(companyname,companylevel,pricechange)
+View(company)
+write.csv(company,'company list.csv')

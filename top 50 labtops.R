@@ -1,0 +1,13 @@
+library(rvest)
+library(dplyr)
+link='https://www.flipkart.com/search?q=laptops&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off'
+web=read_html(link)
+name=web%>%html_nodes("._4rR01T")%>%html_text()
+View(name)
+price=web%>%html_nodes("._1_WHN1")%>%html_text()
+View(price)
+rating=web%>%html_nodes("._1lRcqv ._3LWZlK")%>%html_text()
+View(rating)
+laptop=data.frame(name,price,rating)
+View(laptop)
+write.csv(laptop,"top 50 computers.csv")
